@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 
 class Word {
 private:
@@ -8,4 +9,8 @@ private:
 
 public:
 	Word();
+
+	std::string getWord() {
+		return word;
+	}
 };
