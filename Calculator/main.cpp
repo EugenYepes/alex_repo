@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <cmath>
 using namespace std;
 
 typedef struct
@@ -122,7 +123,7 @@ double converter(string input) // 123.12
         string decimalPart = splitedString[1];
         for (int i = 0; i < decimalPart.size(); i++)
         {
-            value += (decimalPart[i] - '0') * power(10, -i - 1); 
+            value += (decimalPart[i] - '0') * pow(10, -i - 1); 
         }
     }
     return value;
@@ -148,6 +149,7 @@ vector<string> splitString(string input, char spliter)
     return result;
 }
 
+// TODO update to use negative powers
 long long power(int base, int exp)
 {
     long long result = 1;
@@ -169,7 +171,7 @@ bool validatorOperation(char input)
 
 bool validatorNumber(char input)
 {
-    return input >= '0' && input <= '9';
+    return (input >= '0' && input <= '9') || input == '.';
 }
 
 // 754.96
