@@ -4,12 +4,13 @@ using namespace std;
 
 typedef struct
 {
-    double num1;
-    double num2;
-    char oper;
-    double result;
+	double num1;
+	double num2;
+	char oper;
+	double result;
 } operation;
 
+void calculator(operation op, vector<operation> history);
 void calculator(operation op, vector<operation> history);
 operation stringToOper(string input);
 double converter(string input);
@@ -27,8 +28,8 @@ works only with integer values
  */
 int main()
 {
-    string input;
-    vector<operation> history;
+	string input;
+	vector<operation> history;
 
     operation op1;
     printCalc(op1);
@@ -90,100 +91,100 @@ void calculator(operation op, vector<operation> history)
 
 operation stringToOper(string input)
 {
-    operation op;
-    string numb1 = "";
-    string numb2 = "";
-    bool flagSecondNumber = false;
-    for (int i = 0; i < input.size(); i++)
-    {
-        if (validatorOperation(input[i]))
-        {
-            op.oper = input[i];
-            flagSecondNumber = true;
-        }
-        if (validatorNumber(input[i]))
-        {
-            if (flagSecondNumber)
-            {
-                numb2 += input[i];
-            }
-            else
-            {
-                numb1 += input[i];
-            }
-        }
-    }
+	operation op;
+	string numb1 = "";
+	string numb2 = "";
+	bool flagSecondNumber = false;
+	for (int i = 0; i < input.size(); i++)
+	{
+		if (validatorOperation(input[i]))
+		{
+			op.oper = input[i];
+			flagSecondNumber = true;
+		}
+		if (validatorNumber(input[i]))
+		{
+			if (flagSecondNumber)
+			{
+				numb2 += input[i];
+			}
+			else
+			{
+				numb1 += input[i];
+			}
+		}
+	}
 
-    op.num1 = converter(numb1);
-    op.num2 = converter(numb2);
+	op.num1 = converter(numb1);
+	op.num2 = converter(numb2);
 
-    return op;
+	return op;
 }
 
 double converter(string input) // 123.12
 {
-    double value = 0;
-    vector<string> splitedString = splitString(input, '.');
-    string integerPart = splitedString[0];
-    for (int i = 0; i < integerPart.size(); i++)
-    {
-        value += (integerPart[i] - '0') * power(10, integerPart.size() - i - 1); // '123' -> 1 * 100 + 2 * 10 + 3 * 1
-        // '123' -> 1 * 10 ^ 2 + 2 * 10 ^ 1  + 3 * 10 ^ 0
-    }
+	double value = 0;
+	vector<string> splitedString = splitString(input, '.');
+	string integerPart = splitedString[0];
+	for (int i = 0; i < integerPart.size(); i++)
+	{
+		value += (integerPart[i] - '0') * power(10, integerPart.size() - i - 1); // '123' -> 1 * 100 + 2 * 10 + 3 * 1
+		// '123' -> 1 * 10 ^ 2 + 2 * 10 ^ 1  + 3 * 10 ^ 0
+	}
 
-    if (splitedString.size() >= 2)
-    {
-        string decimalPart = splitedString[1];
-        for (int i = 0; i < decimalPart.size(); i++)
-        {
-            value += (decimalPart[i] - '0') * power(10, -i - 1); 
-        }
-    }
-    return value;
+	if (splitedString.size() >= 2)
+	{
+		string decimalPart = splitedString[1];
+		for (int i = 0; i < decimalPart.size(); i++)
+		{
+			value += (decimalPart[i] - '0') * power(10, -i - 1);
+		}
+	}
+	return value;
 }
 
 vector<string> splitString(string input, char spliter)
 {
-    vector<string> result;
-    string aux = "";
-    for (int i = 0; i < input.size(); i++)
-    {
-        if (input[i] == spliter)
-        {
-            result.push_back(aux);
-            aux = "";
-        }
-        else
-        {
-            aux += input[i];
-        }
-    }
-    result.push_back(aux);
-    return result;
+	vector<string> result;
+	string aux = "";
+	for (int i = 0; i < input.size(); i++)
+	{
+		if (input[i] == spliter)
+		{
+			result.push_back(aux);
+			aux = "";
+		}
+		else
+		{
+			aux += input[i];
+		}
+	}
+	result.push_back(aux);
+	return result;
 }
 
 long long power(int base, int exp)
 {
-    long long result = 1;
-    if (exp == 0)
-    {
-        return 1;
-    }
-    for (int i = 0; i < exp; i++)
-    {
-        result *= base;
-    }
-    return result;
+	long long result = 1;
+	if (exp == 0)
+	{
+		return 1;
+	}
+	for (int i = 0; i < exp; i++)
+	{
+		result *= base;
+	}
+	return result;
 }
 
 bool validatorOperation(char input)
 {
-    return input == '+' || input == '-' || input == '*' || input == '/' || input == '^';
+	return input == '+' || input == '-' || input == '*' || input == '/' || input == '^';
 }
 
 bool validatorNumber(char input)
 {
-    return input >= '0' && input <= '9';
+	return input >= '0' && input <= '9';
 }
 
 void printCalc(operation input)
