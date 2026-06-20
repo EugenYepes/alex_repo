@@ -10,12 +10,14 @@ typedef struct
     double result;
 } operation;
 
+void calculator(operation op, vector<operation> history);
 operation stringToOper(string input);
 double converter(string input);
 vector<string> splitString(string input, char spliter);
 long long power(int base, int exp);
 bool validatorOperation(char input);
 bool validatorNumber(char input);
+void printCalc(operation input);
 
 /*
 Restrictions:
@@ -28,11 +30,16 @@ int main()
     string input;
     vector<operation> history;
 
-    cout << "Welcome to the calculator app!\n";
+    operation op1;
+    printCalc(op1);
+        cout << "Welcome to the calculator app!\n";
 
     do
     {
-        cin >> input;
+        getline(cin, input);
+        if (input.empty())
+            continue;
+
         if (input[0] == 'h')
         {
             for (const operation o : history)
@@ -43,35 +50,42 @@ int main()
         else if (input[0] != 'q')
         {
             operation op = stringToOper(input);
-            cout << op.num1 << endl;
-            cout << op.oper << endl; // + or - or * or /
+            cout << op.num1 << " ";
+            cout << op.oper << " "; // + or - or * or /
             cout << op.num2 << endl;
-            switch (op.oper)
-            {
-            case '+':
-                op.result = op.num1 + op.num2;
-                break;
-            case '-':
-                op.result = op.num1 - op.num2;
-                break;
-            case '*':
-                op.result = op.num1 * op.num2;
-                break;
-            case '/':
-                op.result = op.num1 / op.num2;
-                break;
-            case '^':
-                op.result = power(op.num1, op.num2);
-                break;
-            default:
-                cout << "invalid operation" << endl;
-                break;
-            }
-            cout << "result: " << op.result << endl;
-            history.push_back(op);
+
+            calculator(op, history);
         }
     } while (input[0] != 'q');
     cout << "closing the program" << endl;
+}
+
+void calculator(operation op, vector<operation> history)
+{
+    cout << op.oper << endl;
+	switch (op.oper)
+	{
+	case '+':
+		op.result = op.num1 + op.num2;
+		break;
+	case '-':
+		op.result = op.num1 - op.num2;
+		break;
+	case '*':
+		op.result = op.num1 * op.num2;
+		break;
+	case '/':
+		op.result = op.num1 / op.num2;
+		break;
+	case '^':
+		op.result = power(op.num1, op.num2);
+		break;
+	default:
+		cout << "invalid operation" << endl;
+		break;
+	}
+	cout << "result: " << op.result << endl;
+	history.push_back(op);
 }
 
 operation stringToOper(string input)
@@ -171,6 +185,19 @@ bool validatorNumber(char input)
 {
     return input >= '0' && input <= '9';
 }
+
+void printCalc(operation input)
+{
+    string print = " _____________________  \n|  _________________  |\n| |                 | |\n| |_________________| |\n|  ___ ___ ___   ___  |\n| | 7 | 8 | 9 | | + | |\n| |___|___|___| |___| |\n| | 4 | 5 | 6 | | - | |\n| |___|___|___| |___| |\n| | 1 | 2 | 3 | | x | |\n| |___|___|___| |___| |\n| | . | 0 | = | | / | |\n| |___|___|___| |___| |\n|_____________________|\n";
+    cout << print;
+    printf("\033[3;4H");
+    cout << "| |" << input.num1 << input.oper << input.num2 << " = " << input.result  <<"| |";
+
+}
+
+/*
+
+*/
 
 // 754.96
 /*
