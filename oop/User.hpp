@@ -1,8 +1,6 @@
-#ifndef USER_HPP
-#define USER_HPP
 
 #include <string>
-
+#include "Address.hpp"
 using namespace std;
 
 class User {
@@ -10,9 +8,10 @@ private:
     string name;
     int age;
     string email;
+    Address& address;
 public:
     User();
-    User(const string& name, int age, const string& email);
+    User(const string& name, int age, const string& email, Address& address);
 
     void setName(const string& name);
     virtual void setAge(int age);
@@ -31,7 +30,7 @@ public:
 class Client : public User {
 public:
     Client();
-    Client(const string& name, int age, const string& email);
+    Client(const string& name, int age, const string& email, Address& address);
 
     void display() const override;
 };
@@ -39,10 +38,8 @@ public:
 class Admin : public User {
 public:
     Admin();
-    Admin(const string& name, int age, const string& email);
+    Admin(const string& name, int age, const string& email, Address& address);
 
     void setAge(int age) override;
     void display() const override;
 };
-
-#endif
