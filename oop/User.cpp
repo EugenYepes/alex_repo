@@ -34,6 +34,13 @@ bool User::operator==(const User& other) const {
            this->email == other.email;
 }
 
+ostream& operator<<(ostream& os, const User& user) {
+    os << "Name: " << user.name
+       << "\nAge: " << user.age
+       << "\nEmail: " << user.email;
+    return os;
+}
+
 string User::getName() const {
     return this->name;
 }

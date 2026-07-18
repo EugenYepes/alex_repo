@@ -1,6 +1,7 @@
 #ifndef USER_HPP
 #define USER_HPP
 
+#include <iostream>
 #include <string>
 
 using namespace std;
@@ -19,6 +20,8 @@ public:
     void setEmail(const string& email);
 
     bool operator==(const User& other) const;
+
+    friend ostream& operator<<(ostream& os, const User& user);
 
     string getName() const;
     int getAge() const;
