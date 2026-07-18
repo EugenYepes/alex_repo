@@ -4,13 +4,21 @@
 
 using namespace std;
 
-User::User() {
+namespace {
+    Address& defaultAddress() {
+        static Address address;
+        return address;
+    }
+}
+
+User::User() : address(defaultAddress()) {
 	this->name = "";
 	this->age = 0;
 	this->email = "";
 }
 
-User::User(const string& name, int age, const string& email) {
+User::User(const string& name, int age, const string& email, Address& address) : address(address)
+{
 	this->name = name;
 	this->age = age;
 	this->email = email;
@@ -56,12 +64,13 @@ string User::getEmail() const {
 void User::display() const {
     cout << "Name: " << this->name << "\n"
               << "Age: " << this->age << "\n"
-              << "Email: " << this->email << endl;
+              << "Email: " << this->email << "\n"
+              << this->address << endl;
 }
 
 Client::Client() : User() {}
 
-Client::Client(const string& name, int age, const string& email) : User(name, age, email) {
+Client::Client(const string& name, int age, const string& email, Address& address) : User(name, age, email, address) {
 
 }
 
@@ -72,7 +81,7 @@ void Client::display() const {
 
 Admin::Admin() : User() {}
 
-Admin::Admin(const string& name, int age, const string& email) : User(name, age, email) {}
+Admin::Admin(const string& name, int age, const string& email, Address& address) : User(name, age, email, address) {}
 
 void Admin::setAge(int age) {
     if (age >= 30) {
