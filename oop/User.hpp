@@ -26,7 +26,6 @@ public:
     int getAge() const;
     string getEmail() const;
 
-    virtual void display() const;
     virtual ~User() = default;
 };
 
@@ -35,7 +34,6 @@ public:
     Client();
     Client(const string& name, int age, const string& email, Address& address);
 
-    void display() const override;
 };
 
 class Admin : public User {
@@ -44,5 +42,4 @@ public:
     Admin(const string& name, int age, const string& email, Address& address);
 
     void setAge(int age) override;
-    void display() const override;
 };

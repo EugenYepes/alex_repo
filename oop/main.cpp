@@ -9,8 +9,8 @@ int main() {
 
 	address.setCountry("Argentina");
 
-    user.display();
-	user1.display();
+	cout << user;
+	cout << user1;
 
 	std::cout;
 	

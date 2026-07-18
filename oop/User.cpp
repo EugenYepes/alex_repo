@@ -45,7 +45,8 @@ bool User::operator==(const User& other) const {
 ostream& operator<<(ostream& os, const User& user) {
     os << "Name: " << user.name
        << "\nAge: " << user.age
-       << "\nEmail: " << user.email;
+       << "\nEmail: " << user.email << "\n"
+	   << user.address;
     return os;
 }
 
@@ -61,22 +62,10 @@ string User::getEmail() const {
     return this->email;
 }
 
-void User::display() const {
-    cout << "Name: " << this->name << "\n"
-              << "Age: " << this->age << "\n"
-              << "Email: " << this->email << "\n"
-              << this->address << endl;
-}
-
 Client::Client() : User() {}
 
 Client::Client(const string& name, int age, const string& email, Address& address) : User(name, age, email, address) {
 
-}
-
-void Client::display() const {
-    cout << "Role: Client" << endl;
-    User::display();
 }
 
 Admin::Admin() : User() {}
@@ -89,9 +78,4 @@ void Admin::setAge(int age) {
     } else {
         cout << "Admin must be at least 30 years old." << endl;
     }
-}
-
-void Admin::display() const {
-    cout << "Role: Admin" << endl;
-    User::display();
 }
