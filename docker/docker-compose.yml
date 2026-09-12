@@ -1,0 +1,61 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: n8n_postgres
+    restart: "no"
+    environment:
+      - POSTGRES_USER=n8n_admin
+      - POSTGRES_PASSWORD=n8n_secure_pass_2026
+      - POSTGRES_DB=n8n_database
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U n8n_admin -d n8n_database"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  n8n:
+    image: n8nio/n8n:latest
+    container_name: n8n_backend
+    restart: "no"
+    ports:
+      - "5678:5678"
+    environment:
+      - N8N_HOST=localhost
+      - N8N_PORT=5678
+      - N8N_PROTOCOL=http
+      - NODE_ENV=production
+      
+      # [DESARROLLO] URL de Ngrok local
+      - WEBHOOK_URL=https://unfrosted-unclamped-spoils.ngrok-free.dev/
+      
+      # [PRODUCCIÓN] Descomentar y configurar el dominio real en el VPS
+      # - WEBHOOK_URL=https://n8n.tuempresa.com/
+      
+      # [OPTIMIZACIÓN DE LOGS] Nivel de verbosidad (info, debug, error, warn).
+      # En producción setealo en 'error' para no saturar el almacenamiento del VPS.
+      - N8N_LOG_LEVEL=info
+      # - N8N_LOG_LEVEL=error
+
+      # Configuración de persistencia en PostgreSQL
+      - DB_TYPE=postgresdb
+      - DB_POSTGRESDB_HOST=postgres
+      - DB_POSTGRESDB_PORT=5432
+      - DB_POSTGRESDB_DATABASE=n8n_database
+      - DB_POSTGRESDB_USER=n8n_admin
+      - DB_POSTGRESDB_PASSWORD=n8n_secure_pass_2026
+      
+      # [SEGURIDAD] Fuerza a n8n a validar permisos estrictos en archivos de config (Recomendado para VPS)
+      # - N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
+    volumes:
+      - n8n_data:/home/node/.n8n
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  postgres_data:
+  n8n_data:

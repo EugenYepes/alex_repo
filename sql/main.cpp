@@ -4,6 +4,50 @@
 
 using namespace std;
 
+void insertValue(sqlite3* db){ 
+    string name, email;
+    int rc;
+
+    char* err_msg = 0;
+
+	string sql_insert = "INSERT OR IGNORE INTO users (name, email) VALUES (?, ?);";
+	sqlite3_stmt *stmt;
+	rc = sqlite3_prepare_v2(db, sql_insert.c_str(), -1, &stmt, NULL);
+	if (rc != SQLITE_OK) {
+		cerr << "Prepare failed: " << sqlite3_errmsg(db) << endl;
+		sqlite3_close(db);
+		return;
+	}
+
+    do {
+        cout << "Give values for db name: ";
+        getline(cin, name);
+
+        cout << "Give values for db email: ";
+        getline(cin, email);
+
+        if (!name.empty()) {
+
+			sqlite3_bind_text(stmt, 1, name.c_str(), -1, SQLITE_TRANSIENT);
+			sqlite3_bind_text(stmt, 2, email.c_str(), -1, SQLITE_TRANSIENT);
+
+            
+            rc = sqlite3_step(stmt);
+            if (rc != SQLITE_DONE) {
+				cerr << rc << endl;
+                cerr << "SQL error (INSERT): "<< endl;
+                sqlite3_free(err_msg);
+                sqlite3_close(db);
+                return;
+            }
+			sqlite3_reset(stmt); // Reset the statement for the next iteration
+			sqlite3_clear_bindings(stmt); // Clear previous bindings
+        }
+    } while(!name.empty());
+    
+    sqlite3_finalize(stmt); // Finalize the statement after the loop
+}
+
 void get_all_users(sqlite3 *db) {
     sqlite3_stmt *stmt;
     const char *sql = "SELECT id, name, email FROM users;";
@@ -61,46 +105,12 @@ int main(void) {
 
     // 3. Insert data
     
-    string name, email;
-
-	string sql_insert = "INSERT OR IGNORE INTO users (name, email) VALUES (?, ?);";
-	sqlite3_stmt *stmt;
-	rc = sqlite3_prepare_v2(db, sql_insert.c_str(), -1, &stmt, NULL);
-	if (rc != SQLITE_OK) {
-		cerr << "Prepare failed: " << sqlite3_errmsg(db) << endl;
-		sqlite3_close(db);
-		return 1;
-	}
+    insertValue(db);
 
     // Use getline so the user can submit an empty line (press Enter) to exit
-    do {
-        cout << "Give values for db name: ";
-        getline(cin, name);
-
-        cout << "Give values for db email: ";
-        getline(cin, email);
-
-        if (!name.empty()) {
-
-			sqlite3_bind_text(stmt, 1, name.c_str(), -1, SQLITE_TRANSIENT);
-			sqlite3_bind_text(stmt, 2, email.c_str(), -1, SQLITE_TRANSIENT);
-
-            
-            rc = sqlite3_step(stmt);
-            if (rc != SQLITE_DONE) {
-				cerr << rc << endl;
-                cerr << "SQL error (INSERT): " << err_msg << endl;
-                sqlite3_free(err_msg);
-                sqlite3_close(db);
-                return 1;
-            }
-			sqlite3_reset(stmt); // Reset the statement for the next iteration
-			sqlite3_clear_bindings(stmt); // Clear previous bindings
-        }
-    } while(!name.empty());
     
-    sqlite3_finalize(stmt); // Finalize the statement after the loop
-
+    
+   
 
 
     
