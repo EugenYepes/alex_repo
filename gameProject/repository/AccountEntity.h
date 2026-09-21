@@ -1,3 +1,6 @@
+#ifndef ACCOUNTENTITY_H
+#define ACCOUNTENTITY_H
+
 #include <iostream>
 
 
@@ -8,7 +11,7 @@ typedef enum {
 	REVIEWER
 } accountType_t;
 
-class Account {
+class AccountEntity {
 private:
     int id;
     string email;
@@ -66,3 +69,5 @@ public:
         this->outletName = outletName;
     }
 };
+
+#endif

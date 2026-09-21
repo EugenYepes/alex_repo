@@ -1,4 +1,8 @@
+#ifndef GAMEENTITY_H
+#define GAMEENTITY_H
+
 #include <iostream>
+
 
 using namespace std;
 
@@ -15,7 +19,7 @@ typedef enum{
 } medium_type_t;
 
 
-class Game {
+class GameEntity {
 private:
     int id;
     string title;
@@ -42,6 +46,33 @@ public:
     void setGenre(const string& value) { genre = value; }
 
     gameStatus_t getStatus() const { return status; }
+
+	string getStatusString() {
+		switch (this->status)
+		{
+		case gameStatus_t::BACKLOG:
+			return "BACKLOG";
+		case gameStatus_t::IN_PROGRESS:
+			return "IN_PROGRESS";
+		case gameStatus_t::COMPLETED:
+			return "COMPLETED";
+		default:
+			return "";
+		}
+	}
+
+    string getMediumTypeSting() {
+		switch (this->medium_type)
+		{
+		case medium_type_t::DIGITIAL:
+			return "DIGITIAL";
+		case medium_type_t::HARDCOPY:
+			return "HARDCOPY";
+		default:
+			return "";
+		}
+	}
+
     void setStatus(gameStatus_t value) { status = value; }
 
     medium_type_t getMediumType() const { return medium_type; }
@@ -59,3 +90,4 @@ public:
     string getRegion() const { return region; }
     void setRegion(const string& value) { region = value; }
 };
+#endif 
