@@ -1,28 +1,19 @@
 {
+    "version": "2.0.0",
     "tasks": [
         {
-            "type": "cppbuild",
-            "label": "C/C++: g++.exe build active file",
-            "command": "C:\\msys64\\ucrt64\\bin\\g++.exe",
+            "label": "Build gameProject",
+            "type": "shell",
+            "command": "cmd.exe",
             "args": [
-                "-fdiagnostics-color=always",
-                "-g",
-                "${file}",
-                "-o",
-                "${fileDirname}\\.build\\${fileBasenameNoExtension}.exe"
-            ],
-            "options": {
-                "cwd": "${fileDirname}"
-            },
-            "problemMatcher": [
-                "$gcc"
+                "/c",
+                "cd /d \"${workspaceFolder}\\gameProject\" && cmake -B build -G \"MinGW Makefiles\" && cmake --build build"
             ],
             "group": {
                 "kind": "build",
                 "isDefault": true
             },
-            "detail": "compiler: C:\\msys64\\ucrt64\\bin\\g++.exe"
+            "problemMatcher": "$gcc"
         }
-    ],
-    "version": "2.0.0"
+    ]
 }

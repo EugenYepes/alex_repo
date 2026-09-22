@@ -6,6 +6,7 @@ DAO::DAO(char *databaseName) {
         cerr << "Cannot open database: " << sqlite3_errmsg(db) << endl;
         sqlite3_close(db);
     }
+	this->dataBaseName = dataBaseName;
 }
 
 DAO::~DAO() {

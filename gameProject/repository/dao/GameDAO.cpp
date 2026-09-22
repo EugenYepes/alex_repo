@@ -4,7 +4,7 @@
 int GameDAO::createGame(GameEntity gameEntity) {
 	sqlite3_stmt *stmt;
 	
-	const char * sqlInsert = "INSERT INTO games(title, release_year, genre, status, medium_type, file_size_gb, drm_platform, has_box, region) VALUES(?,?,?,?,?,?,?,?,?);";
+	const char * sqlInsert = "INSERT OR IGNORE INTO games(title, release_year, genre, status, medium_type, file_size_gb, drm_platform, has_box, region) VALUES(?,?,?,?,?,?,?,?,?);";
 	int rc = sqlite3_prepare_v2(DAO::getDb(), sqlInsert, -1, &stmt, NULL);
 	if (rc != SQLITE_OK) {
 		cerr << "Prepare failed: " << sqlite3_errmsg(DAO::getDb()) << endl;

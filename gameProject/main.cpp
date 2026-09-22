@@ -1,11 +1,15 @@
 #include "lib/sqlite3.h"
 #include <iostream>
 #include "repository/GameEntity.h"
+#include "repository/AccountEntity.h"
+#include "repository/ReviewEntity.h"
 #include "repository/dao/GameDAO.h"
-
+#include "repository/dao/AccountDAO.h"
+#include "repository/dao/ReviewDAO.h"
 
 
 int main(){
+	std::cout<<"hello";
 	GameEntity* game = new GameEntity();
 	game->setTitle("HitMan 47");
 	game->setReleaseYear(2017);
@@ -19,5 +23,16 @@ int main(){
 	GameDAO gameDao("game.db");
 	gameDao.createGame(*game);
 
-	
+	AccountEntity* account = new AccountEntity();
+	game->setTitle("HitMan 47");
+	game->setReleaseYear(2017);
+	game->setGenre("Stealth");
+	game->setStatus(gameStatus_t::COMPLETED);
+	game->setMediumType(medium_type_t::DIGITIAL);
+	game->setFileSizeGB(81);
+	game->setHasBox(false);
+	game->setRegion("USA");
+
+	AccountDAO accountDao("game.db");
+	accountDao.createAccount(*account);
 }

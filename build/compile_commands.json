@@ -1,0 +1,38 @@
+[
+{
+  "directory": "C:/Users/eugen/Desktop/Classes/Preply/Alex/Project/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe  @CMakeFiles/game_project.dir/includes_CXX.rsp -g -std=c++17 -o CMakeFiles\\game_project.dir\\main.cpp.obj -c C:\\Users\\eugen\\Desktop\\Classes\\Preply\\Alex\\Project\\gameProject\\main.cpp",
+  "file": "C:/Users/eugen/Desktop/Classes/Preply/Alex/Project/gameProject/main.cpp",
+  "output": "CMakeFiles/game_project.dir/main.cpp.obj"
+},
+{
+  "directory": "C:/Users/eugen/Desktop/Classes/Preply/Alex/Project/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe  @CMakeFiles/game_project.dir/includes_CXX.rsp -g -std=c++17 -o CMakeFiles\\game_project.dir\\repository\\dao\\AccountDAO.cpp.obj -c C:\\Users\\eugen\\Desktop\\Classes\\Preply\\Alex\\Project\\gameProject\\repository\\dao\\AccountDAO.cpp",
+  "file": "C:/Users/eugen/Desktop/Classes/Preply/Alex/Project/gameProject/repository/dao/AccountDAO.cpp",
+  "output": "CMakeFiles/game_project.dir/repository/dao/AccountDAO.cpp.obj"
+},
+{
+  "directory": "C:/Users/eugen/Desktop/Classes/Preply/Alex/Project/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe  @CMakeFiles/game_project.dir/includes_CXX.rsp -g -std=c++17 -o CMakeFiles\\game_project.dir\\repository\\dao\\GameDAO.cpp.obj -c C:\\Users\\eugen\\Desktop\\Classes\\Preply\\Alex\\Project\\gameProject\\repository\\dao\\GameDAO.cpp",
+  "file": "C:/Users/eugen/Desktop/Classes/Preply/Alex/Project/gameProject/repository/dao/GameDAO.cpp",
+  "output": "CMakeFiles/game_project.dir/repository/dao/GameDAO.cpp.obj"
+},
+{
+  "directory": "C:/Users/eugen/Desktop/Classes/Preply/Alex/Project/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe  @CMakeFiles/game_project.dir/includes_CXX.rsp -g -std=c++17 -o CMakeFiles\\game_project.dir\\repository\\dao\\ReviewDAO.cpp.obj -c C:\\Users\\eugen\\Desktop\\Classes\\Preply\\Alex\\Project\\gameProject\\repository\\dao\\ReviewDAO.cpp",
+  "file": "C:/Users/eugen/Desktop/Classes/Preply/Alex/Project/gameProject/repository/dao/ReviewDAO.cpp",
+  "output": "CMakeFiles/game_project.dir/repository/dao/ReviewDAO.cpp.obj"
+},
+{
+  "directory": "C:/Users/eugen/Desktop/Classes/Preply/Alex/Project/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe  @CMakeFiles/game_project.dir/includes_CXX.rsp -g -std=c++17 -o CMakeFiles\\game_project.dir\\repository\\dao\\DAO.cpp.obj -c C:\\Users\\eugen\\Desktop\\Classes\\Preply\\Alex\\Project\\gameProject\\repository\\dao\\DAO.cpp",
+  "file": "C:/Users/eugen/Desktop/Classes/Preply/Alex/Project/gameProject/repository/dao/DAO.cpp",
+  "output": "CMakeFiles/game_project.dir/repository/dao/DAO.cpp.obj"
+},
+{
+  "directory": "C:/Users/eugen/Desktop/Classes/Preply/Alex/Project/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe  @CMakeFiles/game_project.dir/includes_C.rsp -g -o CMakeFiles\\game_project.dir\\lib\\sqlite3.c.obj -c C:\\Users\\eugen\\Desktop\\Classes\\Preply\\Alex\\Project\\gameProject\\lib\\sqlite3.c",
+  "file": "C:/Users/eugen/Desktop/Classes/Preply/Alex/Project/gameProject/lib/sqlite3.c",
+  "output": "CMakeFiles/game_project.dir/lib/sqlite3.c.obj"
+}
+]

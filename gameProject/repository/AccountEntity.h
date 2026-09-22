@@ -49,6 +49,18 @@ public:
         return this->accountType;
     }
 
+    string getAccountTypeString() {
+		switch (this->accountType)
+		{
+		case accountType_t::PLAYER:
+			return "player";
+		case accountType_t::REVIEWER:
+			return "reviewer";
+		default:
+			return "";
+		}
+	}
+
     void setAccountType(accountType_t accountType) {
         this->accountType = accountType;
     }
