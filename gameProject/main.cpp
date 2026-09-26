@@ -9,7 +9,7 @@
 
 
 int main(){
-	std::cout<<"hello";
+	std::cout<<"hello"<< std::endl;
 	GameEntity* game = new GameEntity();
 	game->setTitle("HitMan 47");
 	game->setReleaseYear(2017);
