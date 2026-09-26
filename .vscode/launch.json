@@ -8,10 +8,10 @@
             "program": "${workspaceFolder}/gameProject/build/game_project.exe",
             "args": [],
             "stopAtEntry": false,
-            "cwd": "${workspaceFolder}/gameProject/build",
+            "cwd": "${workspaceFolder}/gameProject",
             "externalConsole": false,
             "MIMode": "gdb",
-            "miDebuggerPath": "gdb.exe",
+            "miDebuggerPath": "C:/msys64/ucrt64/bin/gdb.exe",
             "setupCommands": [
                 {
                     "description": "Enable pretty-printing for gdb",

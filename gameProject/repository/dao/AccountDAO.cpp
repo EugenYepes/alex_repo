@@ -4,7 +4,7 @@
 int AccountDAO::createAccount(AccountEntity accountEntity) {
 	sqlite3_stmt *stmt;
 	
-	const char * sqlInsert = "INSERT OR IGNORE INTO account(email, username, account_type, pref_platform) VALUES (?,?,?,?);";
+	const char * sqlInsert = "INSERT OR IGNORE INTO accounts(email, username, account_type, pref_platform) VALUES (?,?,?,?);";
 	int rc = sqlite3_prepare_v2(DAO::getDb(), sqlInsert, -1, &stmt, NULL);
 	if (rc != SQLITE_OK) {
 		cerr << "Prepare failed: " << sqlite3_errmsg(DAO::getDb()) << endl;

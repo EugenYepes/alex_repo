@@ -4,7 +4,7 @@
 int GameDAO::createGame(GameEntity gameEntity) {
 	sqlite3_stmt *stmt;
 	
-	const char * sqlInsert = "INSERT OR IGNORE INTO games(title, release_year, genre, status, medium_type, file_size_gb, drm_platform, has_box, region) VALUES(?,?,?,?,?,?,?,?,?);";
+	const char * sqlInsert = "INSERT INTO games(title, release_year, genre, status, medium_type, file_size_gb, drm_platform, has_box, region) VALUES(?,?,?,?,?,?,?,?,?);";
 	int rc = sqlite3_prepare_v2(DAO::getDb(), sqlInsert, -1, &stmt, NULL);
 	if (rc != SQLITE_OK) {
 		cerr << "Prepare failed: " << sqlite3_errmsg(DAO::getDb()) << endl;
@@ -23,8 +23,17 @@ int GameDAO::createGame(GameEntity gameEntity) {
     sqlite3_bind_int(stmt, 8, gameEntity.getHasBox());
     sqlite3_bind_text(stmt, 9, gameEntity.getRegion().c_str(), -1, SQLITE_TRANSIENT);
 
+	// Print the full SQL query with bound parameter values
+	char* expandedSql = sqlite3_expanded_sql(stmt);
+	if (expandedSql) {
+		cout << "Executing SQL: " << expandedSql << endl;
+		sqlite3_free(expandedSql);
+	}
+
 	rc = sqlite3_step(stmt);
 	if (rc != SQLITE_DONE) {
+		cerr << "Step failed (Error " << rc << "): " << sqlite3_errmsg(DAO::getDb()) << endl;
+		sqlite3_finalize(stmt);
 		return -2;
 	}
 

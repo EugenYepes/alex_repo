@@ -51,11 +51,11 @@ public:
 		switch (this->status)
 		{
 		case gameStatus_t::BACKLOG:
-			return "BACKLOG";
+			return "backlog";
 		case gameStatus_t::IN_PROGRESS:
-			return "IN_PROGRESS";
+			return "in_progress";
 		case gameStatus_t::COMPLETED:
-			return "COMPLETED";
+			return "completed";
 		default:
 			return "";
 		}
@@ -65,9 +65,9 @@ public:
 		switch (this->medium_type)
 		{
 		case medium_type_t::DIGITIAL:
-			return "DIGITIAL";
+			return "digital";
 		case medium_type_t::HARDCOPY:
-			return "HARDCOPY";
+			return "hardcopy";
 		default:
 			return "";
 		}
