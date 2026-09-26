@@ -3,6 +3,9 @@
 #include "repository/AccountEntity.h"
 #include "repository/dao/GameDAO.h"
 #include "repository/dao/AccountDAO.h"
+#include "ui/CreateAccountScreen.h"
+#include "ui/CreateGameScreen.h"
+#include "ui/Screen.h"
 
 
 int main(){
@@ -29,4 +32,15 @@ int main(){
 
 	AccountDAO accountDao("C:/Users/eugen/Desktop/Classes/Preply/Alex/Project/gameProject/game.db");
 	accountDao.createAccount(*account);
+
+	CreateAccountScreen<AccountEntity> createAccount;
+	createAccount.display();
+
+	CreateGameScreen<GameEntity> createGame;
+	createGame.display();
+}
+
+
+void print(Screen screen) {
+	screen.display()
 }
